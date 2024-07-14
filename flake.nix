@@ -52,17 +52,26 @@
           };
         };
 
+
         packages = {
           default = nvim;
+          vite = pkgs.buildGoModule {
+            name = "vite";
+            rev = "master";
+            src = ./.;
+
+            vendorHash = "sha256-aHPT3Vl0is+NYaHqkdDjDjEVjvXnwCqK7Bbgm5FhBT0=";
+          };
         };
 
         devShells.default = pkgs.mkShellNoCC {
           shellHook = ''
-            echo Welcome to a Neovim dev environment powered by Nixvim -- https://github.com/nix-community/nixvim
+            echo Welcome to Neovim powered by Nixvim -- https://github.com/nix-community/nixvim
             PS1="Nixvim: \\w \$ "
             alias vim='nvim'
           '';
           packages = with pkgs; [
+            nodejs
             nvim
             go
             gopls
