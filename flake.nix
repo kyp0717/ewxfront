@@ -52,7 +52,6 @@
           };
         };
 
-
         packages = {
           default = nvim;
           vite = pkgs.buildGoModule {
@@ -66,7 +65,7 @@
 
         devShells.default = pkgs.mkShellNoCC {
           shellHook = ''
-            echo Welcome to Neovim powered by Nixvim -- https://github.com/nix-community/nixvim
+            echo Neovim powered by Nixvim + Go + NodeJS with Vite
             PS1="Nixvim: \\w \$ "
             alias vim='nvim'
           '';
