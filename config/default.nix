@@ -1,103 +1,84 @@
-{pkgs, lib, ...}: {
+{ config
+, lib
+, ...
+}: {
   imports = [
-    ./keymaps.nix
-    ./style.nix
-    ./telescope.nix
-    ./treesitter.nix
-    ./harpoon.nix
-    ./folds.nix
-    ./lsp.nix
-    ./completion.nix
-    ./format.nix
-    ./lint.nix
-    ./debug.nix
+    ./autocommands.nix
+    ./keys.nix
+    ./sets.nix
+    ./highlight.nix
+
+    ./plug/colorscheme/biscuit.nix
+    ./plug/colorscheme/colorscheme.nix
+
+    ./plug/completion/cmp.nix
+    ./plug/completion/copilot-cmp.nix
+    ./plug/completion/lspkind.nix
+    ./plug/completion/schemastore.nix
+
+    ./plug/git/gitlinker.nix
+    ./plug/git/gitsigns.nix
+    ./plug/git/lazygit.nix
+    ./plug/git/worktree.nix
+
+    ./plug/lsp/conform.nix
+    ./plug/lsp/fidget.nix
+    ./plug/lsp/hlchunk.nix
+    ./plug/lsp/lsp.nix
+    ./plug/lsp/lspsaga.nix
+    ./plug/lsp/none-ls.nix
+    ./plug/lsp/trouble.nix
+
+    ./plug/snippets/luasnip.nix
+
+    ./plug/statusline/lualine.nix
+    #./plug/statusline/staline.nix
+
+    #./plug/treesitter/treesitter-context.nix
+    ./plug/treesitter/treesitter-textobjects.nix
+    ./plug/treesitter/treesitter.nix
+
+    #./plug/ui/alpha.nix
+    ./plug/ui/btw.nix
+    ./plug/ui/bufferline.nix
+    ./plug/ui/indent-blankline.nix
+    ./plug/ui/noice.nix
+    ./plug/ui/nvim-notify.nix
+    #./plug/ui/precognition.nix
+    ./plug/ui/telescope.nix
+
+    #./plug/utils/harpoon.nix
+    ./plug/utils/comment.nix
+    ./plug/utils/copilot.nix
+    #./plug/utils/flash.nix
+    ./plug/utils/grapple.nix
+    ./plug/utils/hardtime.nix
+    ./plug/utils/illuminate.nix
+    ./plug/utils/markview.nix
+    ./plug/utils/mini.nix
+    ./plug/utils/nvim-autopairs.nix
+    ./plug/utils/obsidian.nix
+    ./plug/utils/oil.nix
+    ./plug/utils/ufo.nix
+    ./plug/utils/undotree.nix
+    ./plug/utils/whichkey.nix
+    ./plug/utils/yaml-companion.nix
   ];
-
+  options = {
+    theme = lib.mkOption {
+      default = lib.mkDefault "paradise";
+      type = lib.types.enum [ "paradise" "decay" "edge-dark" "mountain" "tokyonight" "everforest" "everblush" "jellybeans" "aquarium" "gruvbox" ];
+    };
+    assistant = lib.mkOption {
+      default = "none";
+      type = lib.types.enum [ "copilot" "none" ];
+    };
+  };
   config = {
-    globals = {
-      mapleader = " ";
-    };
-
-    options = {
-      number = true;
-      colorcolumn = "80";
-      relativenumber = true;
-      shiftwidth = 2;
-      tabstop = 2;
-      wrap = false;
-      swapfile = false; #Undotree
-      backup = false; #Undotree
-      undofile = true;
-      hlsearch = false;
-      incsearch = true;
-      termguicolors = true;
-      scrolloff = 8;
-      signcolumn = "yes";
-      updatetime = 50;
-      foldlevelstart = 99;
-    };
-
-    plugins = {
-      gitsigns.enable = true;
-      oil.enable = true;
-      undotree.enable = true;
-      fugitive.enable = true;
-      nvim-tree.enable = true;
-    };
-    extraPackages = with pkgs; [
-      # Formatters
-      alejandra
-      asmfmt
-      astyle
-      black
-      cmake-format
-      gofumpt
-      golines
-      gotools
-      isort
-      nodePackages.prettier
-      prettierd
-      rustfmt
-      shfmt
-      stylua
-      # Linters
-      commitlint
-      eslint_d
-      golangci-lint
-      hadolint
-      html-tidy
-      luajitPackages.luacheck
-      markdownlint-cli
-      nodePackages.jsonlint
-      pylint
-      ruff
-      shellcheck
-      vale
-      yamllint
-      # Debuggers / misc deps
-      asm-lsp
-      bashdb
-      clang-tools
-      delve
-      fd
-      gdb
-      go
-      lldb_17
-      llvmPackages_17.bintools-unwrapped
-      marksman
-
-    (nerdfonts.override {
-      fonts = [
-        "JetBrainsMono"
-        "RobotoMono"
-      ];
-    })
-
-      python3
-      ripgrep
-      rr
-      tmux-sessionizer
-      zig
-    ];
+    # The base16 theme to use, if you want to use another theme, change it in colorscheme.nix
+    theme = "paradise";
+    extraConfigLua = ''
+      _G.theme = "${config.theme}"
+    '';
   };
 }
