@@ -8,6 +8,8 @@
     ./sets.nix
     ./highlight.nix
 
+    ./ntree.nix
+
     ./plug/colorscheme/biscuit.nix
     ./plug/colorscheme/colorscheme.nix
 
@@ -66,7 +68,7 @@
   ];
   options = {
     theme = lib.mkOption {
-      default = lib.mkDefault "paradise";
+      default = lib.mkDefault "tokyonight";
       type = lib.types.enum [ "paradise" "decay" "edge-dark" "mountain" "tokyonight" "everforest" "everblush" "jellybeans" "aquarium" "gruvbox" ];
     };
     assistant = lib.mkOption {
@@ -76,7 +78,8 @@
   };
   config = {
     # The base16 theme to use, if you want to use another theme, change it in colorscheme.nix
-    theme = "paradise";
+    # theme = "paradise";
+    theme = "tokyonight";
     extraConfigLua = ''
       _G.theme = "${config.theme}"
     '';

@@ -8,10 +8,6 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # pre-commit-hooks = {
-    #   url = "github:cachix/pre-commit-hooks.nix";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
     utils.url = "github:numtide/flake-utils";
     gomod2nix = {
       url = "github:tweag/gomod2nix";
@@ -26,7 +22,6 @@
     { nixpkgs
     , nixvim
     , flake-parts
-      # , pre-commit-hooks
     , gomod2nix
     , ...
     } @ inputs:
@@ -53,16 +48,7 @@
               inherit nvim;
               name = "A nixvim configuration";
             };
-            # pre-commit-check = pre-commit-hooks.lib.${system}.run {
-            #   src = ./.;
-            #   hooks = {
-            #     statix.enable = true;
-            #     nixpkgs-fmt.enable = true;
-            #   };
-            # };
           };
-
-          # formatter = pkgs.nixpkgs-fmt;
 
           packages = {
             default = nvim;
@@ -78,7 +64,6 @@
           devShells = {
             default = with pkgs;
               mkShell {
-                # inherit (self'.checks.pre-commit-check) shellHook;
                 packages = [
                   nvim
                   nodejs

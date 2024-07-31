@@ -28,6 +28,11 @@
     }
 
     {
+      mode = [ "n" "v" ];
+      key = "<leader>p";
+      action = "+grapple";
+    }
+    {
       mode = "n";
       key = "<leader>u";
       action = "+ui";
@@ -55,6 +60,12 @@
       mode = [ "n" "v" ];
       key = "<leader>c";
       action = "+code";
+    }
+
+    {
+      mode = [ "n" "v" ];
+      key = "<leader>cf";
+      action = "<cmd>lua vim.diagnostic.open_float()<cr>";
     }
 
     {
@@ -311,63 +322,63 @@
 
     {
       mode = "n";
-      key = "<leader>m";
+      key = "<leader>pm";
       action = "<CMD> Grapple toggle <CR>";
       options = { desc = "Grapple Toggle tag"; };
     }
 
     {
       mode = "n";
-      key = "<leader>k";
+      key = "<leader>pt";
       action = "<CMD> Grapple toggle_tags <CR>";
       options = { desc = "Grapple Toggle tag"; };
     }
 
     {
       mode = "n";
-      key = "<leader>K";
+      key = "<leader>ps";
       action = "<CMD> Grapple toggle_scopes <CR>";
       options = { desc = "Grapple Toggle scopes"; };
     }
 
     {
       mode = "n";
-      key = "<leader>j";
+      key = "<leader>pj";
       action = "<CMD> Grapple cycle forward <CR>";
       options = { desc = "Grapple Cycle forward"; };
     }
 
     {
       mode = "n";
-      key = "<leader>J";
+      key = "<leader>pk";
       action = "<CMD> Grapple cycle backward <CR>";
       options = { desc = "Grapple Cycle backward"; };
     }
 
     {
       mode = "n";
-      key = "<leader>1";
+      key = "<leader>p1";
       action = "<CMD> Grapple select index=1<CR>";
       options = { desc = "Grapple Select 1"; };
     }
 
     {
       mode = "n";
-      key = "<leader>2";
+      key = "<leader>p2";
       action = "<CMD> Grapple select index=2<CR>";
       options = { desc = "Grapple Select 2"; };
     }
 
     {
       mode = "n";
-      key = "<leader>3";
+      key = "<leader>p3";
       action = "<CMD> Grapple select index=3<CR>";
       options = { desc = "Grapple Select 3"; };
     }
 
     {
       mode = "n";
-      key = "<leader>4";
+      key = "<leader>p4";
       action = "<CMD> Grapple select index=4<CR>";
       options = { desc = "Grapple Select 4"; };
     }
