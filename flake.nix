@@ -9,12 +9,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     utils.url = "github:numtide/flake-utils";
-    gomod2nix = {
-      url = "github:tweag/gomod2nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.utils.follows = "utils";
-    };
-
 
   };
 
@@ -22,7 +16,6 @@
     { nixpkgs
     , nixvim
     , flake-parts
-    , gomod2nix
     , ...
     } @ inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -52,13 +45,6 @@
 
           packages = {
             default = nvim;
-
-            vite = pkgs.buildGoModule {
-              name = "vite";
-              rev = "master";
-              src = ./.;
-              vendorHash = "sha256-aHPT3Vl0is+NYaHqkdDjDjEVjvXnwCqK7Bbgm5FhBT0=";
-            };
           };
 
           devShells = {
@@ -67,12 +53,6 @@
                 packages = [
                   nvim
                   nodejs
-                  go
-                  gopls
-                  gotools
-                  go-tools
-                  gomod2nix.packages.${system}.default
-                  sqlite-interactive
                 ];
               };
           };
