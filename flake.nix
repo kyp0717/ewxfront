@@ -54,6 +54,9 @@
                   nvim
                   nodejs
                 ];
+                shellHook = ''
+                  export PROMPT="%m%d"
+                '';
               };
           };
         };
