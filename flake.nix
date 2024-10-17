@@ -55,7 +55,8 @@
                   nodejs
                 ];
                 shellHook = ''
-                  export PROMPT="%m%d"
+                  export PROMPT="%B%{%}⚡NVIM% %(?:%{%}➜ :%{%} ➜ )%{%}%c%{%}$vcs_info_msg_0_"
+                  zsh
                 '';
               };
           };
