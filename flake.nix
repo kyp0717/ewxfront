@@ -2,7 +2,7 @@
   description = "Elyth's NeoVim configuration";
 
   inputs = {
-    templ.url = "github.com/a-h/templ"; 
+    templ.url = "github:a-h/templ"; 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixvim = {
@@ -36,7 +36,7 @@
             inherit pkgs;
             module = ./config;
           };
-	  templOverlay = templ.packages.${system}.templ
+	  templOverlay = templ.packages.${system}.templ;
         in
         {
 
@@ -48,14 +48,10 @@
             default = with pkgs;
               mkShell {
                 packages = [
-		  templ
+		  templOverlay
                   nvim
                   nodejs
                 ];
-                shellHook = ''
-                  export PROMPT="%B%{%}⚡NVIM% %(?:%{%}➜ :%{%} ➜ )%{%}%c%{%}$vcs_info_msg_0_"
-                  zsh
-                '';
               };
           };
         };
