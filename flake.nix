@@ -2,6 +2,7 @@
   description = "Elyth's NeoVim configuration";
 
   inputs = {
+    templ.url = "github.com/a-h/templ"; 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixvim = {
@@ -16,6 +17,7 @@
     { nixpkgs
     , nixvim
     , flake-parts
+    , templ
     , ...
     } @ inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -34,23 +36,19 @@
             inherit pkgs;
             module = ./config;
           };
+	  templOverlay = templ.packages.${system}.templ
         in
         {
-          checks = {
-            default = pkgs.nixvimLib.check.mkTestDerivationFromNvim {
-              inherit nvim;
-              name = "A nixvim configuration";
-            };
-          };
 
           packages = {
-            default = nvim;
+            default = [templOverlay nvim];
           };
 
           devShells = {
             default = with pkgs;
               mkShell {
                 packages = [
+		  templ
                   nvim
                   nodejs
                 ];
