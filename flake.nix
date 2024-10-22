@@ -50,7 +50,7 @@
                 packages = [
                   templOverlay
                   nvim
-                  nodejs
+                  #nodejs
                 ];
               };
           };
