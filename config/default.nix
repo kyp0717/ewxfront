@@ -73,7 +73,8 @@
     };
     assistant = lib.mkOption {
       default = "none";
-      type = lib.types.enum [ "copilot" "none" ];
+      # type = lib.types.enum [ "copilot" "none" ];
+      type = lib.types.enum [ "none" ];
     };
   };
   config = {
